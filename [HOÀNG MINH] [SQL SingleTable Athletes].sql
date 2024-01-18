@@ -875,7 +875,7 @@ GROUP BY 1
 HAVING SUM(gold) > (SUM(silver) + SUM(bronze))
 ORDER BY 2 DESC
 
-#63.	Cho biết tên nước có số lượng VDV tham gia 2 môn judo và taekwondo là nhiều nhất. 
+#63. Cho biết tên nước có số lượng VDV tham gia 2 môn judo và taekwondo là nhiều nhất. 
 # SỬ DỤNG LIMIT
 SELECT nationality, COUNTIF(sport='judo') + COUNTIF(sport='taekwondo') AS judo_taekwondo 
 FROM `hoangminh-410403.ATHLETES.ATHLETES`
