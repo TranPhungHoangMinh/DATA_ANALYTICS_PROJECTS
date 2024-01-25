@@ -626,10 +626,11 @@ WITH CTE AS
       WHERE JobTitleName = 'Data Lead' AND EmployeeResidence IN ('IN','GB')
       GROUP BY 1
 )
-SELECT IF(MAX_BY(EmployeeResidence,AVGSalary) = 'IN','YES','NO') AS ANSWER
+SELECT IF(MAX_BY(EmployeeResidence, AVGSalary) = 'IN','YES','NO') AS ANSWER
 FROM CTE;
 
 #(36). Cho biết tỷ lệ của từng loại Experience so với tổng số khảo sát chỉ tính cho những công ty có văn phòng đóng tại Mỹ (Company Location=’US’).
+-- SỬ DỤNG CTE
 WITH CTE1 AS
 (
       SELECT ExperienceLevel,
@@ -641,6 +642,14 @@ SELECT ExperienceLevelName, CTE1.Rate
 FROM CTE1 
 INNER JOIN `DataScienceSalaries.Experience` X
 USING(ExperienceLevel);
+
+-- KHÔNG SỬ DỤNG CTE
+SELECT
+  ExperienceLevel,
+  ROUND(COUNTIF(CompanyLocation = 'US')/COUNT(*),2) AS Rate
+FROM `DataScienceSalaries.DS_Salaries`A
+JOIN `DataScienceSalaries.Experience`B USING(ExperienceLevel)
+GROUP BY 1;
 
 
 
